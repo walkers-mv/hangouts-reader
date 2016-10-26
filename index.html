@@ -122,6 +122,7 @@ You can view the source code <a href="https://github.com/Jessecar96/hangouts-rea
 
 		// First we want to get all participants, so we loop fully once
 		for(key in Hangouts['conversation_state']) {
+            if(Hangouts['conversation_state'][key]['conversation_state']){
 			var conversation = Hangouts['conversation_state'][key]['conversation_state']['conversation'];
 
 			// Get all participants
@@ -136,6 +137,7 @@ You can view the source code <a href="https://github.com/Jessecar96/hangouts-rea
 			}
 
 		}
+        }
 
 		for(key in Hangouts['conversation_state']) {
 
@@ -215,7 +217,7 @@ You can view the source code <a href="https://github.com/Jessecar96/hangouts-rea
 		$('.txt').text('');
 		for(var event_id in Conversations[id]){
 			var convo_event = Conversations[id][event_id];
-			$('.txt').append(convo_event.sender + ": " + convo_event.message + "\n");
+			$('.txt').append(convo_event.sender + "(<small>" + (new Date(parseInt(convo_event.timestamp)/1000.0)).toString().slice(0,-15) + "</small>): " +  convo_event.message + "\n");
 		}
 	}
 
